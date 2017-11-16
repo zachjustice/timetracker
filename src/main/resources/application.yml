@@ -1,0 +1,10 @@
+spring:
+  mvc:
+    dispatch-options-request: true
+  # ===============================
+  # = DATA SOURCE
+  # ===============================
+  datasource:
+    url: jdbc:postgresql://${CHRONOS_DB_HOST}:${CHRONOS_DB_PORT}/${CHRONOS_DB_NAME}
+    username: ${CHRONOS_DB_USERNAME}
+    password: ${CHRONOS_DB_PASSWORD}
