@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,26 @@ public class TimeEntryController {
     public ResponseEntity<TimeEntry> createTimeEntry(@RequestBody TimeEntry timeEntry) {
         timeEntryService.saveTimeEntry(timeEntry);
         logger.info("Saved TimeEntry: " + timeEntry.toString());
+
+        return new ResponseEntity<>(timeEntry, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/api/time/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<TimeEntry> updateTimeEntry(
+            @PathVariable("id") int id,
+            @RequestBody TimeEntry timeEntry) {
+
+        if(id == 0 || timeEntry.getId() == 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        TimeEntry existing = timeEntryService.findById(id);
+        if(existing == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        timeEntryService.saveTimeEntry(timeEntry);
+        logger.info("Update TimeEntry: " + timeEntry.toString());
 
         return new ResponseEntity<>(timeEntry, HttpStatus.OK);
     }

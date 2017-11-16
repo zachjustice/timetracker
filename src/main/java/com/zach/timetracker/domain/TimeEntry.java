@@ -7,18 +7,17 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 @javax.persistence.Entity
 @Table(name = "time_entries")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class TimeEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", insertable = false, updatable = false)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, scope = TimeEntry.class)
     private int id;
 
     @ManyToOne

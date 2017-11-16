@@ -8,26 +8,22 @@ import javax.persistence.*;
 
 @javax.persistence.Entity
 @Table(name = "activities")
-@JsonIdentityInfo(
-    generator = ObjectIdGenerators.PropertyGenerator.class,
-    property = "id"
-)
 public class Activity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "id", insertable = false, updatable = false)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, scope = Activity.class)
+    private int id;
 
     @NotEmpty
     @Column(name = "label")
     private String label;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

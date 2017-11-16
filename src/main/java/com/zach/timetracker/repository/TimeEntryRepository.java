@@ -10,4 +10,5 @@ import java.util.List;
 public interface TimeEntryRepository  extends JpaRepository<TimeEntry, Long> {
     @Override
     List<TimeEntry> findAll();
+    TimeEntry findById(int id);
 }

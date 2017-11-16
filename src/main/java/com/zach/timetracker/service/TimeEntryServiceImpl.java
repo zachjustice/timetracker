@@ -23,4 +23,9 @@ public class TimeEntryServiceImpl implements TimeEntryService {
     public List<TimeEntry> findAll() {
         return timeEntryRepository.findAll();
     }
+
+    @Override
+    public TimeEntry findById(int id) {
+        return timeEntryRepository.findById(id);
+    }
 }
