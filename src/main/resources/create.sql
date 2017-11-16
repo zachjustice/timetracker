@@ -10,7 +10,7 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
-CREATE TABLE activies(
+CREATE TABLE activities(
   id INTEGER NOT NULL PRIMARY KEY,
   label CHARACTER VARYING NOT NULL
 );

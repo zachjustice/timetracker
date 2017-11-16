@@ -30,7 +30,7 @@ public class ActivityController {
         return new ResponseEntity<>(activity, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/activity", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/activities", method = RequestMethod.GET)
     public ResponseEntity<List<Activity>> findAllActivities() {
         List<Activity> activities = activityService.findAll();
 
