@@ -25,7 +25,7 @@ public class TimeEntryController {
 
     @RequestMapping(value = "/api/time", method = RequestMethod.POST)
     public ResponseEntity<TimeEntry> createTimeEntry(@RequestBody TimeEntry timeEntry) {
-        timeEntryService.saveTimeEntry(timeEntry);
+        timeEntryService.save(timeEntry);
         logger.info("Saved TimeEntry: " + timeEntry.toString());
 
         return new ResponseEntity<>(timeEntry, HttpStatus.OK);
@@ -45,15 +45,34 @@ public class TimeEntryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        timeEntryService.saveTimeEntry(timeEntry);
+        timeEntryService.save(timeEntry);
         logger.info("Update TimeEntry: " + timeEntry.toString());
 
         return new ResponseEntity<>(timeEntry, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/api/time/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<TimeEntry> deleteTimeEntry(
+            @PathVariable("id") Long id) {
+
+        if(id == 0) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        TimeEntry existing = timeEntryService.findById(id.intValue());
+        if(existing == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        timeEntryService.delete(id);
+        logger.info("Deleted TimeEntry: " + existing.toString());
+
+        return new ResponseEntity<>(existing, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/api/time", method = RequestMethod.GET)
     public ResponseEntity<List<TimeEntry>> findAllTimeEntries() {
-        List<TimeEntry> timeEntries = timeEntryService.findAll();
+        List<TimeEntry> timeEntries = timeEntryService.findAllByOrderByStartedDesc();
         return new ResponseEntity<>(timeEntries, HttpStatus.OK);
     }
 }

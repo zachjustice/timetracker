@@ -15,14 +15,24 @@ public class TimeEntryServiceImpl implements TimeEntryService {
         this.timeEntryRepository = timeEntryRepository;
     }
 
-    public TimeEntry saveTimeEntry(TimeEntry timeEntry) {
+    public TimeEntry save(TimeEntry timeEntry) {
         return timeEntryRepository.save(timeEntry);
+    }
+
+    public void delete(Long id) {
+        timeEntryRepository.delete(id);
     }
 
     @Override
     public List<TimeEntry> findAll() {
         return timeEntryRepository.findAll();
     }
+
+    @Override
+    public List<TimeEntry> findAllByOrderByStartedDesc() {
+        return timeEntryRepository.findAllByOrderByStartedDesc();
+    }
+
 
     @Override
     public TimeEntry findById(int id) {

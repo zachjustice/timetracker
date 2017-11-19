@@ -10,5 +10,10 @@ import java.util.List;
 public interface TimeEntryRepository  extends JpaRepository<TimeEntry, Long> {
     @Override
     List<TimeEntry> findAll();
+
+    @Override
+    void delete(Long aLong);
+
+    List<TimeEntry> findAllByOrderByStartedDesc();
     TimeEntry findById(int id);
 }

@@ -18,12 +18,12 @@ CREATE TABLE activities(
 CREATE TABLE time_entries (
   id SERIAL PRIMARY KEY,
   created TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
-  activity_id INT NOT NULL REFERENCES activies(id),
+  activity_id INT NOT NULL REFERENCES activities(id),
 
   comment CHARACTER VARYING(1000),
   started TIMESTAMP NOT NULL,
-  ended TIMESTAMP NOT NULL
+  ended TIMESTAMP
 );
 
-insert into activies (id, label)  values(1, 'family'), (2, 'friends'), (3,'work'), (4, 'travel'),  (5, 'commuting'), (6, 'internet'), (7, 'side projects');
+insert into activities (id, label)  values(1, 'family'), (2, 'friends'), (3,'work'), (4, 'travel'),  (5, 'commuting'), (6, 'internet'), (7, 'side projects');
 

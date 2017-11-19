@@ -28,16 +28,16 @@ public class TimeEntry {
     private String comment;
 
     @Column(name = "started")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date started;
 
     @Column(name = "ended")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date ended;
 
     @Column(name = "created", insertable = false, updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date created;
 
     public int getId() {
