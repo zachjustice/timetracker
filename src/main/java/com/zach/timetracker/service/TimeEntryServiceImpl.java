@@ -3,6 +3,7 @@ package com.zach.timetracker.service;
 import com.zach.timetracker.domain.TimeEntry;
 import com.zach.timetracker.repository.TimeEntryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,8 +20,9 @@ public class TimeEntryServiceImpl implements TimeEntryService {
         return timeEntryRepository.save(timeEntry);
     }
 
-    public void delete(Long id) {
-        timeEntryRepository.delete(id);
+    @Transactional
+    public void deleteById(Integer id) {
+        timeEntryRepository.deleteById(id);
     }
 
     @Override

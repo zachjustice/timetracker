@@ -53,18 +53,18 @@ public class TimeEntryController {
 
     @RequestMapping(value = "/api/time/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<TimeEntry> deleteTimeEntry(
-            @PathVariable("id") Long id) {
+            @PathVariable("id") int id) {
 
         if(id == 0) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        TimeEntry existing = timeEntryService.findById(id.intValue());
+        TimeEntry existing = timeEntryService.findById(id);
         if(existing == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        timeEntryService.delete(id);
+        timeEntryService.deleteById(id);
         logger.info("Deleted TimeEntry: " + existing.toString());
 
         return new ResponseEntity<>(existing, HttpStatus.OK);

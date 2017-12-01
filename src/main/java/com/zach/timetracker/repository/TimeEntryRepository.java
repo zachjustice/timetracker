@@ -11,8 +11,7 @@ public interface TimeEntryRepository  extends JpaRepository<TimeEntry, Long> {
     @Override
     List<TimeEntry> findAll();
 
-    @Override
-    void delete(Long aLong);
+    void deleteById(Integer id);
 
     List<TimeEntry> findAllByOrderByStartedDesc();
     TimeEntry findById(int id);

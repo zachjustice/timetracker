@@ -30,4 +30,8 @@ dependencies {
 	runtime('com.h2database:h2')
 	runtime('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	compile 'com.google.api-client:google-api-client:1.23.0'
+	compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+	compile 'com.google.apis:google-api-services-calendar:v3-rev266-1.23.0'
 }

@@ -5,7 +5,7 @@ import com.zach.timetracker.domain.TimeEntry;
 import java.util.List;
 
 public interface TimeEntryService {
-    void delete(Long id);
+    void deleteById(Integer id);
     TimeEntry save(TimeEntry timeEntry);
     List<TimeEntry> findAll();
     List<TimeEntry> findAllByOrderByStartedDesc();
