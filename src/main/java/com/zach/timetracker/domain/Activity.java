@@ -11,8 +11,9 @@ import javax.persistence.*;
 public class Activity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", insertable = false, updatable = false)
-    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, scope = Activity.class)
+    @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, scope = TimeEntry.class)
     private int id;
 
     @NotEmpty

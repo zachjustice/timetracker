@@ -8,6 +8,6 @@ public interface TimeEntryService {
     void deleteById(Integer id);
     TimeEntry save(TimeEntry timeEntry);
     List<TimeEntry> findAll();
-    List<TimeEntry> findAllByOrderByStartedDesc();
+    List<TimeEntry> findAllByOrderByStartedDesc(int limit, int offset);
     TimeEntry findById(int id);
 }

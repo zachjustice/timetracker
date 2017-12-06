@@ -11,8 +11,9 @@ END;
 $$ language 'plpgsql';
 
 CREATE TABLE activities(
-  id INTEGER NOT NULL PRIMARY KEY,
-  label CHARACTER VARYING NOT NULL
+  id SERIAL PRIMARY KEY,
+  label CHARACTER VARYING NOT NULL,
+  CONSTRAINT UNIQUE(label)
 );
 
 CREATE TABLE time_entries (

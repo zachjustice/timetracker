@@ -31,8 +31,26 @@ public class TimeEntryServiceImpl implements TimeEntryService {
     }
 
     @Override
-    public List<TimeEntry> findAllByOrderByStartedDesc() {
-        return timeEntryRepository.findAllByOrderByStartedDesc();
+    public List<TimeEntry> findAllByOrderByStartedDesc(int limit, int offset) {
+        if(limit > 100) {
+            // TODO arbitrary for now
+            limit = 100;
+        }
+
+        if(limit < 1) {
+            limit = 1;
+        }
+
+        if(offset > 100) {
+            // TODO arbitrary for now
+            offset = 100;
+        }
+
+        if(offset < 0) {
+            offset = 0;
+        }
+
+        return timeEntryRepository.findAllByOrderByStartedDesc(limit, offset);
     }
 
 

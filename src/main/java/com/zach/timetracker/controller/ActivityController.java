@@ -2,6 +2,7 @@ package com.zach.timetracker.controller;
 
 import com.zach.timetracker.domain.Activity;
 import com.zach.timetracker.service.ActivityService;
+import javassist.tools.web.BadHttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "/api/activity", method = RequestMethod.POST)
-    public ResponseEntity<Activity> createActivity(@RequestBody Activity activity) {
+    public ResponseEntity<Activity> createActivity(@RequestBody Activity activity) throws BadHttpRequest {
         activityService.saveActivity(activity);
         logger.info("Saved Activity: " + activity.toString());
 

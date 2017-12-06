@@ -2,6 +2,7 @@ package com.zach.timetracker.service;
 
 import com.zach.timetracker.domain.Activity;
 import com.zach.timetracker.repository.ActivityRepository;
+import javassist.tools.web.BadHttpRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,12 @@ public class ActivityServiceImpl implements ActivityService {
         this.activityRepository = activityRepository;
     }
 
-    public Activity saveActivity(Activity activity) {
+    public Activity saveActivity(Activity activity) throws BadHttpRequest {
+        Activity existing = activityRepository.findByLabel(activity.getLabel());
+        if(existing != null) {
+            throw new BadHttpRequest();
+        }
+
         return activityRepository.save(activity);
     }
 
