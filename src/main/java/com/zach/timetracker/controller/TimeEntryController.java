@@ -4,6 +4,8 @@ import com.zach.timetracker.domain.TimeEntry;
 import com.zach.timetracker.service.TimeEntryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,12 +35,12 @@ public class TimeEntryController {
             @PathVariable("id") int id,
             @RequestBody TimeEntry timeEntry) {
 
-        if(id == 0 || timeEntry.getId() == 0) {
+        if (id == 0 || timeEntry.getId() == 0) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         TimeEntry existing = timeEntryService.findById(id);
-        if(existing == null) {
+        if (existing == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -50,14 +52,15 @@ public class TimeEntryController {
 
     @RequestMapping(value = "/api/time/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<TimeEntry> deleteTimeEntry(
-            @PathVariable("id") int id) {
+            @PathVariable("id") int id
+    ) {
 
-        if(id < 0) {
+        if (id < 0) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         TimeEntry existing = timeEntryService.findById(id);
-        if(existing == null) {
+        if (existing == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -68,12 +71,11 @@ public class TimeEntryController {
     }
 
     @RequestMapping(value = "/api/time", method = RequestMethod.GET)
-    public ResponseEntity<List<TimeEntry>> findAllTimeEntries(
-           @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
-           @RequestParam(value = "offset", required = false, defaultValue = "0") int offset
+    public ResponseEntity<Page<TimeEntry>> findAllTimeEntries(
+            Pageable pageable
     ) {
 
-        List<TimeEntry> timeEntries = timeEntryService.findAllByOrderByStartedDesc(limit, offset);
+        Page<TimeEntry> timeEntries = timeEntryService.findAllByOrderByStartedDesc(pageable);
 
         return new ResponseEntity<>(timeEntries, HttpStatus.OK);
     }

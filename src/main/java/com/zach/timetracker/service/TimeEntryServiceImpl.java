@@ -2,6 +2,8 @@ package com.zach.timetracker.service;
 
 import com.zach.timetracker.domain.TimeEntry;
 import com.zach.timetracker.repository.TimeEntryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,26 +33,9 @@ public class TimeEntryServiceImpl implements TimeEntryService {
     }
 
     @Override
-    public List<TimeEntry> findAllByOrderByStartedDesc(int limit, int offset) {
-        if(limit > 100) {
-            // TODO arbitrary for now
-            limit = 100;
-        }
+    public Page<TimeEntry> findAllByOrderByStartedDesc(Pageable pageable) {
 
-        if(limit < 1) {
-            limit = 1;
-        }
-
-        if(offset > 100) {
-            // TODO arbitrary for now
-            offset = 100;
-        }
-
-        if(offset < 0) {
-            offset = 0;
-        }
-
-        return timeEntryRepository.findAllByOrderByStartedDesc(limit, offset);
+        return timeEntryRepository.findAllByOrderByStartedDesc(pageable);
     }
 
 
